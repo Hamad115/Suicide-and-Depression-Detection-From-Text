@@ -56,13 +56,8 @@ def transform_predict(input_text):
 
     return prediction, prediction_proba
 
-prediction_proba = transform_predict("I want to kill myself")
+prediction_proba = transform_predict("I feel lonely and unwanted")
 
 prediction_probability = pd.DataFrame(prediction_proba)
 
 print(prediction_probability)
-
-# import plotly.express as px
-
-# fig = px.bar(prediction_probability)
-# fig.show()
