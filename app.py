@@ -11,8 +11,9 @@ st.image(image, use_column_width = True)
 st.write(
     """
     ## Enter some text that will be classified as Suicide, Depression or something that a Teenager would write.
-
     ## The dataset is a collection of posts from "SuicideWatch" and "depression" subreddits of the Reddit platform.
+    
+    ***
     """
 )
 
