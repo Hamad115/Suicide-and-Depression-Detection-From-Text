@@ -65,16 +65,46 @@ prediction_probability = pd.DataFrame(prediction_proba)
 print(prediction_probability)
 
 #%%
-
-# random = pd.DataFrame({"SuicideWatch": prediction_probability[0],
-#               "Depression" : prediction_proba[1],
-#               "Teengaers" : prediction_proba[2]  
-# })
-
-# print(random)
-#%%
 import plotly.express as px
 
 fig = px.bar(prediction_proba[1])
 fig.update_layout(title_text='Bar Graph of Prediction Probability of Each Class')   
 fig.show()
+
+# %%
+from sklearn.feature_extraction.text import CountVectorizer
+
+vectorizer = CountVectorizer(stop_words='english')
+document_term_matrix = vectorizer.fit_transform(train_data)
+vectorizer.get_feature_names()
+
+# %%
+print(vectorizer.vocabulary_)
+
+# %%
+
+def get_top_n_words(corpus, n=None):
+    """
+    List the top n words in a vocabulary according to occurrence in a text corpus.
+    
+    get_top_n_words(["I love Python", "Python is a language programming", "Hello world", "I love the world"]) -> 
+    [('python', 2),
+     ('world', 2),
+     ('love', 2),
+     ('hello', 1),
+     ('is', 1),
+     ('programming', 1),
+     ('the', 1),
+     ('language', 1)]
+    """
+    vec = CountVectorizer().fit(corpus)
+    bag_of_words = vec.transform(corpus)
+    sum_words = bag_of_words.sum(axis=0) 
+    words_freq = [(word, sum_words[0, idx]) for word, idx in     vec.vocabulary_.items()]
+    words_freq =sorted(words_freq, key = lambda x: x[1], reverse=True)
+    return words_freq[:n]
+
+# %%
+get_top_n_words(train_data, n = 300)
+
+# %%
